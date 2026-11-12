@@ -1,0 +1,22 @@
+{
+  "name": "shopabhi",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Abhinav",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "npm --prefix frontend run build",
+    "render-build": "npm run install-all && npm run build",
+    "start": "cd backend && npm start",
+    "dev": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "npm --prefix backend run dev",
+    "start:frontend": "npm --prefix frontend run dev",
+    "seed": "npm --prefix backend run seed"
+  },
+  "dependencies": {
+    "concurrently": "^10.0.7"
+  }
+}

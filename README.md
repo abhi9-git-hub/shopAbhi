@@ -1,0 +1,45 @@
+# ShopAbhi
+
+ShopAbhi is a MERN e-commerce application with a React storefront, an Express API, MongoDB persistence, an admin dashboard, Cloudinary image uploads, and Razorpay checkout.
+
+## Requirements
+
+- Node.js and npm
+- MongoDB (local or hosted)
+
+## Local setup
+
+1. Install dependencies from the project root:
+
+   ```bash
+   npm run install-all
+   ```
+
+2. Copy `backend/.env.example` to `backend/.env` and set the values you use. `MONGO_URI` and `JWT_SECRET` are required. Set `EMAIL_USER` and `EMAIL_PASS` for registration emails; without them, registration currently returns an error. Configure Cloudinary for product image uploads and Razorpay for checkout payments.
+
+3. Start the frontend and backend:
+
+   ```bash
+   npm run dev
+   ```
+
+   The frontend runs at `http://localhost:3000`; the API runs at `http://localhost:5000`.
+
+To run only the backend, use `npm start` from the project root. To create a frontend production build, use `npm run build`.
+
+## Seed data
+
+Run `npm run seed` from the project root to create the sample admin and products. **This command deletes existing users and products before seeding.**
+
+The seed admin is `admin@shopabhi.com` with password `password123`. This is for local development only; change or remove these credentials before using a deployed database.
+
+## Deploy as one service
+
+The backend serves the compiled React app when `NODE_ENV=production`.
+
+- Build command: `npm run render-build`
+- Start command: `npm start`
+- Set `NODE_ENV=production`, `MONGO_URI`, and a strong `JWT_SECRET` in the hosting provider's environment settings.
+- Set `EMAIL_USER` and `EMAIL_PASS` if users need to register. Add Cloudinary and Razorpay credentials for product image uploads and checkout payments.
+
+The build command installs the root, backend, and frontend dependencies, then builds the frontend. The backend serves that build and handles `/api` requests from the same origin.
