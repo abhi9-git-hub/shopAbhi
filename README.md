@@ -15,7 +15,7 @@ ShopAbhi is a MERN e-commerce application with a React storefront, an Express AP
    npm run install-all
    ```
 
-2. Copy `backend/.env.example` to `backend/.env` and set the values you use. `MONGO_URI` and `JWT_SECRET` are required. Set `EMAIL_USER` and `EMAIL_PASS` for registration emails; without them, registration currently returns an error. Configure Cloudinary for product image uploads and Razorpay for checkout payments.
+2. Set local configuration in `backend/.env`. This file contains secrets, is ignored by Git, and must not be committed. At minimum, set `MONGO_URI` and `JWT_SECRET`. Set `EMAIL_USER` and `EMAIL_PASS` for registration emails; without them, registration currently returns an error. Configure Cloudinary for product image uploads and Razorpay for checkout payments. On a hosting provider, set these values in its environment-variable settings instead of uploading `.env`.
 
 3. Start the frontend and backend:
 
