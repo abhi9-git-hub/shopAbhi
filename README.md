@@ -15,7 +15,7 @@ ShopAbhi is a MERN e-commerce application with a React storefront, an Express AP
    npm run install-all
    ```
 
-2. Set local configuration in `backend/.env`. This file contains secrets, is ignored by Git, and must not be committed. At minimum, set `MONGO_URI` and `JWT_SECRET`. Set `EMAIL_USER` and `EMAIL_PASS` for registration emails; without them, registration currently returns an error. Configure Cloudinary for product image uploads and Razorpay for checkout payments. On a hosting provider, set these values in its environment-variable settings instead of uploading `.env`.
+2. Set local configuration in `backend/.env`. This file contains secrets, is ignored by Git, and must not be committed. At minimum, set `MONGO_URI` and `JWT_SECRET`. Set `EMAIL_USER` and `EMAIL_PASS` for registration emails; without them, registration currently returns an error. For product image uploads, configure Cloudinary with `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. For checkout payments, configure Razorpay with `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET`. On a hosting provider, set these values in its environment-variable settings instead of uploading `.env`.
 
 3. Start the frontend and backend:
 
@@ -40,6 +40,6 @@ The backend serves the compiled React app when `NODE_ENV=production`.
 - Build command: `npm run render-build`
 - Start command: `npm start`
 - Set `NODE_ENV=production`, `MONGO_URI`, and a strong `JWT_SECRET` in the hosting provider's environment settings.
-- Set `EMAIL_USER` and `EMAIL_PASS` if users need to register. Add Cloudinary and Razorpay credentials for product image uploads and checkout payments.
+- Set `EMAIL_USER` and `EMAIL_PASS` if users need to register. For product image uploads, set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. For checkout payments, set `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET`.
 
 The build command installs the root, backend, and frontend dependencies, then builds the frontend. The backend serves that build and handles `/api` requests from the same origin.
