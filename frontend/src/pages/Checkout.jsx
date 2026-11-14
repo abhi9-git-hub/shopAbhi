@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { clearCart } from '../redux/cartSlice';
+import { apiFetch } from '../api';
 
 const Checkout = () => {
   const { user } = useContext(AuthContext);
@@ -28,7 +29,7 @@ const Checkout = () => {
         throw new Error('Payment checkout could not be loaded. Please refresh and try again.');
       }
 
-      const orderRes = await fetch('/api/payments/order', {
+      const orderRes = await apiFetch('/api/payments/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: totalPrice })
@@ -52,7 +53,7 @@ const Checkout = () => {
         order_id: orderData.id,
         handler: async function (response) {
           try {
-            const verifyRes = await fetch('/api/payments/verify', {
+            const verifyRes = await apiFetch('/api/payments/verify', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(response)
@@ -62,7 +63,7 @@ const Checkout = () => {
               throw new Error(verifyData?.message || 'Payment verification failed.');
             }
 
-            const saveOrderRes = await fetch('/api/orders', {
+            const saveOrderRes = await apiFetch('/api/orders', {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',

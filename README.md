@@ -33,13 +33,24 @@ Run `npm run seed` from the project root to create the sample admin and products
 
 The seed admin is `admin@shopabhi.com` with password `password123`. This is for local development only; change or remove these credentials before using a deployed database.
 
-## Deploy as one service
+## Deploy to Render
+
+The app can run as one service or as a separate static frontend and backend.
+
+### Single service
 
 The backend serves the compiled React app when `NODE_ENV=production`.
 
 - Build command: `npm run render-build`
 - Start command: `npm start`
 - Set `NODE_ENV=production`, `MONGO_URI`, and a strong `JWT_SECRET` in the hosting provider's environment settings.
-- Set `EMAIL_USER` and `EMAIL_PASS` if users need to register. For product image uploads, set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET`. For checkout payments, set `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET`.
+- Set `EMAIL_USER` and `EMAIL_PASS` if users need to register. For product image uploads, configure Cloudinary. For checkout payments, configure Razorpay.
 
-The build command installs the root, backend, and frontend dependencies, then builds the frontend. The backend serves that build and handles `/api` requests from the same origin.
+The backend serves the frontend build and handles `/api` requests from the same origin.
+
+### Separate frontend and backend
+
+- Deploy `frontend` as a Render Static Site and `backend` as a Render Web Service.
+- Set `REACT_APP_API_BASE_URL` in the frontend build environment to the backend's public URL. The production build defaults to `https://shopabhi-backend-gf9t.onrender.com`; set the variable to override it.
+- Set `FRONTEND_URL` in the backend environment to the frontend's public URL so browser API requests pass CORS checks.
+- Configure the backend's required environment variables as described above.
